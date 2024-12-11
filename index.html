@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>PhysicsWorld - Explore the Universe</title>
     <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.auth0.com/js/auth0-spa-js/1.18/auth0-spa-js.production.js"></script>
     <script defer src="js/script.js"></script>
 </head>
 <body>
@@ -15,6 +16,9 @@
         <header class="header">
             <h1 class="animate-text">Welcome to the Physics World 11</h1>
             <p class="subheading">Your source for the latest in physics, from quantum mechanics to astrophysics!</p>
+            <!-- Add the login/logout buttons -->
+            <button id="login" class="auth-button">Login</button>
+            <button id="logout" class="auth-button" style="display: none;">Logout</button>
         </header>
 
         <main>
