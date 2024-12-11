@@ -131,3 +131,25 @@ body {
     0% { transform: translateY(20px); opacity: 0; }
     100% { transform: translateY(0); opacity: 1; }
 }
+
+/* Button Styles */
+.auth-button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    background-color: #004e92;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+}
+
+.auth-button:hover {
+    background-color: #003c70;
+}
+
+.auth-button:focus {
+    outline: none;
+}
+
