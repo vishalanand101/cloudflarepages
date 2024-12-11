@@ -1,8 +1,8 @@
 document.addEventListener("DOMContentLoaded", async function () {
     // Initialize the Auth0 client
     const auth0 = await createAuth0Client({
-        domain: 'YOUR_AUTH0_DOMAIN',  // Replace with your Auth0 domain (e.g., 'your-app.auth0.com')
-        client_id: 'YOUR_AUTH0_CLIENT_ID',  // Replace with your Auth0 client ID
+        domain: 'dev-aw2zto4r1fqzsj8i.us.auth0.com',  // Replace with your Auth0 domain (e.g., 'your-app.auth0.com')
+        client_id: 'Loevn4yrlaE1UkugPQAeeDLQwtTPtoOu',  // Replace with your Auth0 client ID
         redirect_uri: window.location.href,  // Set the redirect URI to the current URL
     });
 
