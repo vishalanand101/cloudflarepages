@@ -8,15 +8,145 @@
     <link rel="stylesheet" href="css/style.css">
     <script src="https://cdn.auth0.com/js/auth0-spa-js/1.18/auth0-spa-js.production.js"></script>
     <script defer src="js/script.js"></script>
+    <style>
+        /* Set background image from Unsplash */
+        body {
+            font-family: 'Arial', sans-serif;
+            overflow-x: hidden;
+            height: 100vh;
+            background-image: url('https://images.unsplash.com/photo-1521747116042-5a810fda9664'); /* Unsplash image URL */
+            background-size: cover;
+            background-position: center;
+            color: #fff;
+            position: relative;
+        }
+
+        /* Dark overlay on top of the background image */
+        .background-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5); /* Adjust the opacity for darkness */
+            z-index: -1;
+        }
+
+        /* Container for content */
+        .content-container {
+            position: relative;
+            z-index: 1;
+            padding: 50px;
+            text-align: center;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        header h1 {
+            font-size: 3rem;
+            color: #fff;
+            text-transform: uppercase;
+            font-weight: bold;
+            animation: slideIn 1.5s ease-out;
+            transform: translateY(-100px);
+        }
+
+        header p.subheading {
+            font-size: 1.5rem;
+            color: #a0aec0;
+            margin-top: 10px;
+        }
+
+        /* Section Styles */
+        main {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 30px;
+            padding: 30px;
+        }
+
+        .dynamic-content,
+        .about {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease-in-out;
+            transform: translateY(40px);
+            opacity: 0;
+        }
+
+        /* Floating Animation on Scroll */
+        .dynamic-content.show, .about.show {
+            transform: translateY(0);
+            opacity: 1;
+            transition: transform 0.8s ease, opacity 0.8s ease;
+        }
+
+        /* Current time display */
+        #datetime {
+            font-size: 1.8rem;
+            color: #2e3a59;
+            font-weight: bold;
+        }
+
+        /* Button Styles */
+        .auth-button {
+            padding: 10px 20px;
+            font-size: 1rem;
+            background-color: #004e92;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        .auth-button:hover {
+            background-color: #003c70;
+        }
+
+        .auth-button:focus {
+            outline: none;
+        }
+
+        footer {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 1rem;
+            color: #607d8b;
+        }
+
+        /* Keyframe Animations */
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes slideIn {
+            0% { transform: translateY(-100px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes moveUp {
+            0% { transform: translateY(20px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+    </style>
 </head>
 <body>
-    <div class="particles"></div>
-    
+    <div class="background-overlay"></div> <!-- Dark overlay on the background -->
     <div class="content-container">
-        <header class="header">
-            <h1 class="animate-text">Welcome to the Physics World 11</h1>
+        <header>
+            <h1>Welcome to the Physics World</h1>
             <p class="subheading">Your source for the latest in physics, from quantum mechanics to astrophysics!</p>
-            <!-- Add the login/logout buttons -->
+            <!-- Login and Logout Buttons -->
             <button id="login" class="auth-button">Login</button>
             <button id="logout" class="auth-button" style="display: none;">Logout</button>
         </header>
@@ -37,5 +167,11 @@
             <p>PhysicsWorld © 2024</p>
         </footer>
     </div>
+
+    <script>
+        document.getElementById('login').addEventListener('click', function () {
+            window.location.href = '/login.html'; // Redirect to the custom login page
+        });
+    </script>
 </body>
 </html>
