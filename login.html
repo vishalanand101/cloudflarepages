@@ -1,42 +1,131 @@
-<!-- login.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Page</title>
-    <script src="https://cdn.auth0.com/js/auth0-spa-js/1.18/auth0-spa-js.production.js"></script>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login - PhysicsWorld</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <!-- Font Awesome for icons -->
+    <style>
+        /* Set background image from Unsplash */
+        body {
+            font-family: 'Arial', sans-serif;
+            overflow-x: hidden;
+            height: 100vh;
+            background-image: url('https://images.unsplash.com/photo-1521747116042-5a810fda9664'); /* Unsplash image URL */
+            background-size: cover;
+            background-position: center;
+            color: #fff;
+            position: relative;
+        }
+
+        /* Dark overlay on top of the background image */
+        .background-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7); /* Darker overlay for better contrast */
+            z-index: -1;
+        }
+
+        /* Container for content */
+        .content-container {
+            position: relative;
+            z-index: 1;
+            padding: 50px;
+            text-align: center;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        h1 {
+            font-size: 3rem;
+            color: #fff;
+            margin-bottom: 30px;
+        }
+
+        .login-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            width: 300px; /* Fixed width for buttons */
+            margin-top: 30px;
+        }
+
+        .login-button {
+            padding: 12px;
+            font-size: 1.1rem;
+            border-radius: 5px;
+            color: #fff;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            border: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .login-button i {
+            font-size: 1.5rem;
+        }
+
+        .facebook-button {
+            background-color: #3b5998; /* Facebook color */
+        }
+
+        .google-button {
+            background-color: #db4437; /* Google color */
+        }
+
+        .login-button:hover {
+            opacity: 0.8;
+        }
+
+        footer {
+            margin-top: 40px;
+            font-size: 0.9rem;
+            color: #a0aec0;
+        }
+
+    </style>
 </head>
 <body>
-    <div class="login-container">
-        <h1>Login</h1>
-        <button id="login-btn">Login with Google</button>
-        <button id="login-facebook-btn">Login with Facebook</button>
+    <div class="background-overlay"></div> <!-- Dark overlay on the background -->
+    
+    <div class="content-container">
+        <h1>Login to PhysicsWorld</h1>
+        <div class="login-buttons">
+            <!-- Facebook Login Button -->
+            <button class="login-button facebook-button">
+                <i class="fab fa-facebook-f"></i> Login with Facebook
+            </button>
+
+            <!-- Google Login Button -->
+            <button class="login-button google-button">
+                <i class="fab fa-google"></i> Login with Google
+            </button>
+        </div>
+        <footer>
+            <p>PhysicsWorld © 2024</p>
+        </footer>
     </div>
 
     <script>
-        document.addEventListener("DOMContentLoaded", async function () {
-            // Initialize Auth0 client
-            const auth0 = await createAuth0Client({
-                domain: 'dev-aw2zto4r1fqzsj8i.us.auth0.com', // Replace with your Auth0 domain
-                client_id: 'Loevn4yrlaE1UkugPQAeeDLQwtTPtoOu', // Replace with your Auth0 client ID
-                redirect_uri: window.location.href,  // The URI after successful login
-            });
+        // Example login behavior (you can replace this with real auth logic)
+        document.querySelector('.facebook-button').addEventListener('click', function() {
+            alert('Redirecting to Facebook login...');
+            // Here you would add the actual Facebook login logic, e.g. Auth0, Firebase, etc.
+        });
 
-            // Login Button Actions
-            document.getElementById('login-btn').addEventListener('click', async () => {
-                await auth0.loginWithRedirect({ connection: 'google-oauth2' });
-            });
-
-            document.getElementById('login-facebook-btn').addEventListener('click', async () => {
-                await auth0.loginWithRedirect({ connection: 'facebook' });
-            });
-
-            // Handle the callback after login
-            if (window.location.search.includes('code=') && window.location.search.includes('state=')) {
-                await auth0.handleRedirectCallback();
-                window.location.replace('/'); // Redirect back to the homepage (or any other page)
-            }
+        document.querySelector('.google-button').addEventListener('click', function() {
+            alert('Redirecting to Google login...');
+            // Here you would add the actual Google login logic
         });
     </script>
 </body>
