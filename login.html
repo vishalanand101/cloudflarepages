@@ -5,54 +5,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Login - PhysicsWorld</title>
-    <script src="https://cdn.auth0.com/js/auth0-spa-js/1.18/auth0-spa-js.production.js"></script>
-    <script defer src="js/login.js"></script>
     <style>
-        /* Set different background for login page */
+        /* Set a background image for the login page */
         body {
-            font-family: 'Arial', sans-serif;
-            background-image: url('https://images.unsplash.com/photo-1506748686211-00c0389cfc13');  /* Custom image */
+            background-image: url('https://images.unsplash.com/photo-1499902470554-45b3e4c7e575'); /* Example background image */
             background-size: cover;
             background-position: center;
+            font-family: 'Arial', sans-serif;
             height: 100vh;
             color: #fff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+        }
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5); /* Overlay to make text stand out */
+        }
+        .content {
+            position: relative;
+            z-index: 1;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             text-align: center;
-        }
-
-        #auth-container {
-            background: rgba(0, 0, 0, 0.6);  /* Semi-transparent overlay to make text readable */
-            padding: 30px;
-            border-radius: 8px;
-        }
-
-        h1 {
-            margin-bottom: 20px;
-            font-size: 2rem;
-        }
-
-        #auth0-login {
-            padding: 12px 25px;
-            background-color: #004e92;
-            color: #fff;
-            font-size: 1rem;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        #auth0-login:hover {
-            background-color: #003c70;
         }
     </style>
 </head>
 <body>
-    <div id="auth-container">
-        <h1>Login to PhysicsWorld</h1>
-        <button id="auth0-login">Login with Auth0</button>
+    <div class="overlay"></div>
+    <div class="content">
+        <h1>Login</h1>
+        <p>Redirecting to the login page...</p>
+        <script>
+            // Redirect to Auth0 Universal Login page
+            window.location.href = 'https://dev-aw2zto4r1fqzsj8i.us.auth0.com/authorize?response_type=token&client_id=Loevn4yrlaE1UkugPQAeeDLQwtTPtoOu&redirect_uri=' + encodeURIComponent(window.location.href);
+        </script>
     </div>
 </body>
 </html>
