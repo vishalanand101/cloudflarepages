@@ -78,4 +78,9 @@ document.addEventListener("DOMContentLoaded", async function () {
         const mouseY = e.clientY;
         background.style.transform = `translate(${mouseX / 50}px, ${mouseY / 50}px)`;
     });
+
+    // Add functionality for login button redirection
+    document.getElementById('login').addEventListener('click', function () {
+        window.location.href = '/login.html'; // Redirect to the login page
+    });
 });
