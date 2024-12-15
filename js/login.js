@@ -7,12 +7,18 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     // Check if the user is already authenticated
     const isAuthenticated = await auth0.isAuthenticated();
+
     if (isAuthenticated) {
         const user = await auth0.getUser();
-        console.log(user);  // Log user data
-        // Optionally redirect user to home page or another page
-        window.location.href = '/index.html';  // Redirect to home page after successful login
+        console.log(user);  // Log user data (or use this data in your app)
+        
+        // Optionally redirect user to dashboard after successful login
+        window.location.href = '/dashboard.html';  // Redirect to the dashboard page after successful login
     } else {
+        // If user is not authenticated, display login button
+        document.getElementById('auth0-login').style.display = 'inline';
+
+        // Handle login button click
         document.getElementById('auth0-login').addEventListener('click', async function () {
             await auth0.loginWithRedirect();
         });
@@ -21,6 +27,8 @@ document.addEventListener('DOMContentLoaded', async function () {
     // Handle the callback from Auth0 after redirect
     if (window.location.search.includes('code=') && window.location.search.includes('state=')) {
         await auth0.handleRedirectCallback();
-        window.location.replace(window.location.pathname);  // Redirect to the same page to remove code/state from URL
+        
+        // Redirect to the same page to remove code/state from URL (you can also redirect to a specific page here)
+        window.location.replace('/dashboard.html');  // Redirect to dashboard after successful login
     }
 });
