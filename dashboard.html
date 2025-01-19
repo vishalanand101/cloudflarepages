@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -80,6 +81,7 @@
         }
     </style>
 </head>
+
 <body>
     <div class="overlay"></div> <!-- Dark overlay on the background -->
     <div class="content-container">
@@ -95,24 +97,30 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", async function () {
+            // Initialize Auth0 client
             const auth0 = await createAuth0Client({
                 domain: 'dev-aw2zto4r1fqzsj8i.us.auth0.com',  // Replace with your Auth0 domain
                 client_id: 'Loevn4yrlaE1UkugPQAeeDLQwtTPtoOu',  // Replace with your Auth0 client ID
-                redirect_uri: window.location.href,  // This should match the callback URL in the Auth0 dashboard
+                redirect_uri: window.location.href,  // This should match the callback URL in Auth0 settings
             });
 
+            // Check if the user is authenticated
             const isAuthenticated = await auth0.isAuthenticated();
 
             if (isAuthenticated) {
+                // Get user info and display
                 const user = await auth0.getUser();
                 document.getElementById('username').textContent = `Hello, ${user.name}`;
                 document.getElementById('user-email').textContent = `Email: ${user.email}`;
 
+                // Handle logout button click
                 document.getElementById('logout').addEventListener('click', async () => {
+                    const returnToUrl = 'https://neuralnet.co.in/';  // Replace with the URL to redirect to after logout
                     console.log('Logging out...');
+                    console.log('Redirect URL:', returnToUrl);  // Debugging line to ensure the correct URL is passed
                     try {
                         await auth0.logout({
-                            returnTo: 'https://neuralnet.co.in/',  // Make sure this is a valid URL in your Auth0 settings
+                            returnTo: returnToUrl,  // Redirect after logout
                         });
                         console.log('Logout successful!');
                     } catch (error) {
@@ -120,14 +128,16 @@
                     }
                 });
             } else {
+                // Handle login callback or redirect to login page if not authenticated
                 if (window.location.search.includes('code=') && window.location.search.includes('state=')) {
                     await auth0.handleRedirectCallback();
                     window.location.replace(window.location.pathname);
                 } else {
-                    window.location.href = '/login.html';
+                    window.location.href = '/login.html';  // Redirect to login page if not authenticated
                 }
             }
         });
     </script>
 </body>
+
 </html>
