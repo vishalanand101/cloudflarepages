@@ -14,6 +14,7 @@
             font-family: 'Arial', sans-serif;
             height: 100vh;
             color: #fff;
+            margin: 0;
         }
         .overlay {
             position: absolute;
@@ -31,17 +32,32 @@
             transform: translate(-50%, -50%);
             text-align: center;
         }
+        .login-button {
+            background-color: #004e92;
+            color: white;
+            padding: 15px 30px;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .login-button:hover {
+            background-color: #003c70;
+        }
     </style>
 </head>
 <body>
     <div class="overlay"></div>
     <div class="content">
-        <h1>Login</h1>
-        <p>Redirecting to the login page...</p>
-        <script>
-            // Redirect to Auth0 Universal Login page
-            window.location.href = 'https://dev-aw2zto4r1fqzsj8i.us.auth0.com/authorize?response_type=token&client_id=Loevn4yrlaE1UkugPQAeeDLQwtTPtoOu&redirect_uri=' + encodeURIComponent(window.location.href);
-        </script>
+        <h1>Welcome to PhysicsWorld</h1>
+        <p>To explore more, please log in.</p>
+        <!-- Custom login button -->
+        <button id="auth0-login" class="login-button">Login with Auth0</button>
     </div>
+
+    <!-- Include Auth0 SPA SDK -->
+    <script src="https://cdn.auth0.com/js/auth0-spa-js/1.18/auth0-spa-js.production.js"></script>
+    <script src="js/login.js"></script>  <!-- Reference your login.js here -->
 </body>
 </html>
