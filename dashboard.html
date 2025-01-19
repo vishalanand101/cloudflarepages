@@ -120,8 +120,17 @@
                     });
                 });
             } else {
-                // If not authenticated, redirect to login page
-                window.location.href = '/login.html';  // This ensures users are redirected to login if they are not authenticated
+                // If not authenticated, check the URL for callback code
+                if (window.location.search.includes('code=') && window.location.search.includes('state=')) {
+                    // Handle the callback from Auth0 after login
+                    await auth0.handleRedirectCallback();
+
+                    // Redirect to the dashboard or home page after login
+                    window.location.replace(window.location.pathname); // Will reload the page and make it show the dashboard
+                } else {
+                    // If user is not authenticated and no code in URL, redirect to login page
+                    window.location.href = '/login.html';
+                }
             }
         });
     </script>
