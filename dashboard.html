@@ -9,81 +9,12 @@
     <script src="https://cdn.auth0.com/js/auth0-spa-js/1.18/auth0-spa-js.production.js"></script>
     <script defer src="js/dashboard.js"></script>
     <style>
-        /* Set the background image for dashboard */
-        body {
-            font-family: 'Arial', sans-serif;
-            height: 100vh;
-            background-image: url('https://images.unsplash.com/photo-1491321370277-cd6db607a3f1'); /* A beautiful galaxy image */
-            background-size: cover;
-            background-position: center;
-            color: #fff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 0;
-        }
-
-        .overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5); /* Overlay to darken background */
-        }
-
-        .content-container {
-            text-align: center;
-            position: relative;
-            z-index: 1;
-        }
-
-        h1 {
-            font-size: 3rem;
-            color: #fff;
-            margin-bottom: 20px;
-            font-weight: bold;
-            text-transform: uppercase;
-        }
-
-        p {
-            font-size: 1.2rem;
-            color: #a0aec0;
-            margin-bottom: 40px;
-        }
-
-        .user-info {
-            background-color: rgba(255, 255, 255, 0.8);
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            display: inline-block;
-        }
-
-        .user-info h2 {
-            color: #2e3a59;
-        }
-
-        .logout-button {
-            margin-top: 30px;
-            padding: 10px 20px;
-            font-size: 1rem;
-            background-color: #004e92;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        .logout-button:hover {
-            background-color: #003c70;
-        }
+        /* Add your custom styles */
     </style>
 </head>
 
 <body>
-    <div class="overlay"></div> <!-- Dark overlay on the background -->
+    <div class="overlay"></div>
     <div class="content-container">
         <h1>Welcome to the Dashboard</h1>
         <p>Your personal space to explore the universe of physics!</p>
@@ -101,7 +32,7 @@
             const auth0 = await createAuth0Client({
                 domain: 'dev-aw2zto4r1fqzsj8i.us.auth0.com',  // Replace with your Auth0 domain
                 client_id: 'Loevn4yrlaE1UkugPQAeeDLQwtTPtoOu',  // Replace with your Auth0 client ID
-                redirect_uri: 'https://neuralnet.co.in/dashboard.html',  // This should match the callback URL in the Auth0 dashboard
+                redirect_uri: window.location.href,  // This should match the callback URL in the Auth0 dashboard
             });
 
             // Check if the user is authenticated
@@ -121,7 +52,7 @@
                 });
             } else {
                 // If not authenticated, redirect to login page
-                window.location.href = '/login.html';
+                window.location.href = '/login.html';  // This ensures users are redirected to login if they are not authenticated
             }
         });
     </script>
