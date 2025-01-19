@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -81,7 +80,6 @@
         }
     </style>
 </head>
-
 <body>
     <div class="overlay"></div> <!-- Dark overlay on the background -->
     <div class="content-container">
@@ -103,6 +101,12 @@
                 client_id: 'Loevn4yrlaE1UkugPQAeeDLQwtTPtoOu',  // Replace with your Auth0 client ID
                 redirect_uri: window.location.href,  // This should match the callback URL in the Auth0 dashboard
             });
+
+            // Handle the callback from Auth0
+            if (window.location.search.includes('code=') && window.location.search.includes('state=')) {
+                await auth0.handleRedirectCallback();
+                window.history.replaceState({}, document.title, window.location.pathname);  // Clean up the URL
+            }
 
             // Check if the user is authenticated
             const isAuthenticated = await auth0.isAuthenticated();
@@ -126,5 +130,4 @@
         });
     </script>
 </body>
-
 </html>
