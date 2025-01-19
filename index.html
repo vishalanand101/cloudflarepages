@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,7 +8,7 @@
     <title>PhysicsWorld - Explore the Universe</title>
     <link rel="stylesheet" href="css/style.css">
     <script src="https://cdn.auth0.com/js/auth0-spa-js/1.18/auth0-spa-js.production.js"></script>
-    <script defer src="js/script.js"></script>
+    <script defer src="js/login.js"></script>
     <style>
         /* Set background image from Unsplash */
         body {
@@ -91,26 +92,16 @@
         }
     </style>
 </head>
+
 <body>
     <div class="background-overlay"></div>
     <div class="content-container">
         <header>
-            <h1>Welcome to the Physics World</h1>
-            <p class="subheading">Your source for the latest in physics, from quantum mechanics to astrophysics!</p>
-            <!-- Login Button -->
-            <button id="login" class="auth-button">Login</button>
-            <button id="logout" class="auth-button" style="display: none;">Logout</button>
+            <h1>Welcome to PhysicsWorld</h1>
+            <p class="subheading">Explore the mysteries of the universe with us</p>
         </header>
-
-        <footer>
-            <p>PhysicsWorld © 2024</p>
-        </footer>
+        <button id="auth0-login" class="auth-button">Login with Auth0</button>
     </div>
-
-    <script>
-        document.getElementById('login').addEventListener('click', function () {
-            window.location.href = '/login.html'; // Redirect to the custom login page
-        });
-    </script>
 </body>
+
 </html>
