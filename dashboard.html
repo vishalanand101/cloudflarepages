@@ -9,12 +9,81 @@
     <script src="https://cdn.auth0.com/js/auth0-spa-js/1.18/auth0-spa-js.production.js"></script>
     <script defer src="js/dashboard.js"></script>
     <style>
-        /* Add your custom styles */
+        /* Set the background image for dashboard */
+        body {
+            font-family: 'Arial', sans-serif;
+            height: 100vh;
+            background-image: url('https://images.unsplash.com/photo-1501594907353-5b1d8e5ca944'); /* New Unsplash image for the dashboard */
+            background-size: cover;
+            background-position: center;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5); /* Dark overlay on the background */
+        }
+
+        .content-container {
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        h1 {
+            font-size: 3rem;
+            color: #fff;
+            margin-bottom: 20px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        p {
+            font-size: 1.2rem;
+            color: #a0aec0;
+            margin-bottom: 40px;
+        }
+
+        .user-info {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            display: inline-block;
+        }
+
+        .user-info h2 {
+            color: #2e3a59;
+        }
+
+        .logout-button {
+            margin-top: 30px;
+            padding: 10px 20px;
+            font-size: 1rem;
+            background-color: #004e92;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .logout-button:hover {
+            background-color: #003c70;
+        }
     </style>
 </head>
 
 <body>
-    <div class="overlay"></div>
+    <div class="overlay"></div> <!-- Dark overlay on the background -->
     <div class="content-container">
         <h1>Welcome to the Dashboard</h1>
         <p>Your personal space to explore the universe of physics!</p>
@@ -47,7 +116,7 @@
                 // Logout function
                 document.getElementById('logout').addEventListener('click', async () => {
                     await auth0.logout({
-                        returnTo: 'https://neuralnet.co.in/'  // Redirect after logout
+                        returnTo: 'https://neuralnet.co.in/',  // Redirect after logout
                     });
                 });
             } else {
