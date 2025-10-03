@@ -5,22 +5,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Algorithmic Fusion - Revolutionizing Infrastructure</title>
+    <title>Simplification & Speed:</title>
     <link rel="stylesheet" href="css/style.css">
     <script src="https://cdn.auth0.com/js/auth0-spa-js/1.18/auth0-spa-js.production.js"></script>
     <script defer src="js/login.js"></script>
     <style>
+        /* Set background image from Unsplash */
         body {
             font-family: 'Arial', sans-serif;
             overflow-x: hidden;
             height: 100vh;
-            background-image: url('https://images.unsplash.com/photo-1586810724476-c294fb7ac01b');
+            background-image: url('https://images.unsplash.com/photo-1586810724476-c294fb7ac01b'); /* Unsplash image URL */
             background-size: cover;
             background-position: center;
             color: #fff;
             position: relative;
         }
 
+        /* Dark overlay on top of the background image */
         .background-overlay {
             position: absolute;
             top: 0;
@@ -31,6 +33,7 @@
             z-index: -1;
         }
 
+        /* Container for content */
         .content-container {
             position: relative;
             z-index: 1;
@@ -58,6 +61,23 @@
             margin-top: 10px;
         }
 
+        /* Button Styles */
+        .auth-button {
+            padding: 10px 20px;
+            font-size: 1rem;
+            background-color: #004e92;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        .auth-button:hover {
+            background-color: #003c70;
+        }
+
         footer {
             margin-top: 40px;
             text-align: center;
@@ -65,15 +85,10 @@
             color: #607d8b;
         }
 
+        /* Keyframe Animations */
         @keyframes slideIn {
             0% { transform: translateY(-100px); opacity: 0; }
             100% { transform: translateY(0); opacity: 1; }
-        }
-
-        @media (max-width: 768px) {
-            header h1 {
-                font-size: 2rem;
-            }
         }
     </style>
 </head>
@@ -82,10 +97,10 @@
     <div class="background-overlay"></div>
     <div class="content-container">
         <header>
-            <h1>Code Meets Creativity, Logic Sparks Innovation</h1>
-            <p class="subheading">Revolutionizing the Future of Infrastructure</p>
+            <h1>Focus on Lightweight & Cost-Efficient Solutions</h1>
+            <p class="subheading">Algorithmic Fusion builds lightweight, cost-efficient infrastructure tools for developers and businesses seeking speed and simplicity.</p>
         </header>
-        <!-- Removed the Subscribe Button and Form -->
+        <button id="auth0-login" class="auth-button">Login</button>
     </div>
 </body>
 
