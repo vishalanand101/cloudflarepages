@@ -5,24 +5,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>PhysicsWorld - Explore the Universe</title>
+    <title>Algorithmic Fusion - Revolutionizing Infrastructure</title>
     <link rel="stylesheet" href="css/style.css">
     <script src="https://cdn.auth0.com/js/auth0-spa-js/1.18/auth0-spa-js.production.js"></script>
     <script defer src="js/login.js"></script>
     <style>
-        /* Set background image from Unsplash */
         body {
             font-family: 'Arial', sans-serif;
             overflow-x: hidden;
             height: 100vh;
-            background-image: url('https://images.unsplash.com/photo-1586810724476-c294fb7ac01b'); /* Unsplash image URL */
+            background-image: url('https://images.unsplash.com/photo-1586810724476-c294fb7ac01b');
             background-size: cover;
             background-position: center;
             color: #fff;
             position: relative;
         }
 
-        /* Dark overlay on top of the background image */
         .background-overlay {
             position: absolute;
             top: 0;
@@ -33,7 +31,6 @@
             z-index: -1;
         }
 
-        /* Container for content */
         .content-container {
             position: relative;
             z-index: 1;
@@ -61,7 +58,6 @@
             margin-top: 10px;
         }
 
-        /* Button Styles */
         .auth-button {
             padding: 10px 20px;
             font-size: 1rem;
@@ -85,10 +81,18 @@
             color: #607d8b;
         }
 
-        /* Keyframe Animations */
         @keyframes slideIn {
             0% { transform: translateY(-100px); opacity: 0; }
             100% { transform: translateY(0); opacity: 1; }
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+            }
+            .auth-button {
+                width: 100%;
+            }
         }
     </style>
 </head>
@@ -97,10 +101,15 @@
     <div class="background-overlay"></div>
     <div class="content-container">
         <header>
-            <h1>Code Meets Creativity, Logic Sparks Innovation done</h1>
-            <p class="subheading">Explore the mysteries of the universe with us</p>
+            <h1>Code Meets Creativity, Logic Sparks Innovation</h1>
+            <p class="subheading">Revolutionizing the Future of Infrastructure</p>
         </header>
         <button id="auth0-login" class="auth-button">Login</button>
+        <!-- Add Learn More Button or other CTAs as needed -->
+        <form action="#" method="POST">
+            <input type="email" name="email" placeholder="Enter your email for updates..." required>
+            <button type="submit" class="auth-button">Subscribe</button>
+        </form>
     </div>
 </body>
 
