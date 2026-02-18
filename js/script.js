@@ -72,15 +72,21 @@ document.addEventListener("DOMContentLoaded", async function () {
     handleScroll();  // Ensure sections are checked when the page is loaded
 
     // Mouse interaction effect (parallax effect)
-    document.addEventListener('mousemove', function (e) {
-        const background = document.querySelector('.particles');
-        const mouseX = e.clientX;
-        const mouseY = e.clientY;
-        background.style.transform = `translate(${mouseX / 50}px, ${mouseY / 50}px)`;
-    });
+    document.addEventListener("DOMContentLoaded", function () {
+        // Only handle UI/UX, not Auth0 logic here
+        // Update Date & Time (if you have a #datetime element)
+        function updateDateTime() {
+            const datetimeElement = document.getElementById("datetime");
+            if (datetimeElement) {
+                const currentDate = new Date();
+                const formattedDate = currentDate.toLocaleString();
+                datetimeElement.textContent = formattedDate;
+            }
+        }
+        updateDateTime();
+        setInterval(updateDateTime, 1000);
 
-    // Add functionality for login button redirection
-    document.getElementById('login').addEventListener('click', function () {
-        window.location.href = '/login.html'; // Redirect to the login page
+        // Scroll animation for sections (if present)
+        const sections = document.querySelectorAll('.dynamic-content, .about');
+        // ...existing code...
     });
-});
