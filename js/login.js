@@ -1,40 +1,34 @@
 document.addEventListener('DOMContentLoaded', async function () {
     const auth0 = await createAuth0Client({
-        domain: 'dev-aw2zto4r1fqzsj8i.us.auth0.com',
-        client_id: 'Loevn4yrlaE1UkugPQAeeDLQwtTPtoOu',
-        redirect_uri: window.location.origin + '/login.html',
-        cacheLocation: 'localstorage',
-        useRefreshTokens: true
+        domain: 'dev-aw2zto4r1fqzsj8i.us.auth0.com',  // Replace with your Auth0 domain
+        client_id: 'Loevn4yrlaE1UkugPQAeeDLQwtTPtoOu',  // Replace with your Auth0 client ID
+        redirect_uri: window.location.href,  // This should be the URL of your login.html page
     });
 
     // Check if the user is already authenticated
     const isAuthenticated = await auth0.isAuthenticated();
+
     if (isAuthenticated) {
-        // Show project details section if on login page
-        if (window.location.pathname.endsWith('login.html')) {
-            window.dispatchEvent(new Event('cloudnativex:loginSuccess'));
-        } else {
-            window.location.href = '/index.html';
-        }
+        const user = await auth0.getUser();
+        console.log(user);  // Log user data (or use this data in your app)
+
+        // Redirect to the dashboard after successful login
+        window.location.href = '/dashboard.html';  // Redirect to the dashboard page after successful login
     } else {
-        const loginBtn = document.getElementById('auth0-login');
-        if (loginBtn) {
-            loginBtn.addEventListener('click', async function () {
-                loginBtn.disabled = true;
-                loginBtn.textContent = 'Redirecting...';
-                await auth0.loginWithRedirect();
-            });
-        }
+        // If user is not authenticated, display login button
+        document.getElementById('auth0-login').style.display = 'inline';
+
+        // Handle login button click
+        document.getElementById('auth0-login').addEventListener('click', async function () {
+            await auth0.loginWithRedirect();
+        });
     }
 
     // Handle the callback from Auth0 after redirect
     if (window.location.search.includes('code=') && window.location.search.includes('state=')) {
         await auth0.handleRedirectCallback();
-        // After callback, show project details if on login page
-        if (window.location.pathname.endsWith('login.html')) {
-            window.dispatchEvent(new Event('cloudnativex:loginSuccess'));
-        } else {
-            window.location.replace(window.location.pathname);
-        }
+
+        // After handling the redirect callback, redirect to the dashboard page
+        window.location.replace('/dashboard.html');  // Ensure you are redirecting to dashboard after successful login
     }
 });

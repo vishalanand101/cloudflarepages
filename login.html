@@ -5,138 +5,61 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Login - CloudNativeX</title>
-    <script src="https://cdn.auth0.com/js/auth0-spa-js/1.18/auth0-spa-js.production.js"></script>
-    <script defer src="js/login.js"></script>
-    <link rel="stylesheet" href="css/style.css">
+    <title>Login - PhysicsWorld</title>
     <style>
+        /* Set a background image for the login page */
         body {
-            background-image: url('https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=1500&q=80');
-            /* Relevant cloud/technology Unsplash image */
+            background-image: url('https://images.unsplash.com/photo-1737204310662-4d4a541ce471'); /* Example background image */
             background-size: cover;
             background-position: center;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            font-family: 'Arial', sans-serif;
+            height: 100vh;
+            color: #fff;
+            margin: 0;
         }
-
-        .login-glass {
-            background: rgba(10, 20, 40, 0.85);
-            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            border-radius: 18px;
-            padding: 48px 36px 36px 36px;
-            max-width: 370px;
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5); /* Overlay to make text stand out */
+        }
+        .content {
+            position: relative;
+            z-index: 1;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             text-align: center;
-            border: 1.5px solid rgba(255, 255, 255, 0.12);
         }
-
-        .login-glass h1 {
-            font-size: 2.2rem;
-            font-weight: 700;
-            margin-bottom: 10px;
-            letter-spacing: 1px;
-            color: #fff;
-        }
-
-        .login-glass p {
-            color: #a0aec0;
-            margin-bottom: 28px;
-            font-size: 1.1rem;
-        }
-
-        .auth-button {
-            padding: 14px 32px;
-            font-size: 1.1rem;
-            background: linear-gradient(90deg, #004e92 0%, #000428 100%);
-            color: #fff;
+        .login-button {
+            background-color: #004e92;
+            color: white;
+            padding: 15px 30px;
+            font-size: 18px;
             border: none;
             border-radius: 7px;
             cursor: pointer;
-            font-weight: 600;
-            letter-spacing: 0.5px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
-            transition: background 0.3s, transform 0.2s;
+            transition: background-color 0.3s ease;
         }
-
-        .auth-button:hover {
-            background: linear-gradient(90deg, #003c70 0%, #000428 100%);
-            transform: translateY(-2px) scale(1.03);
-        }
-
-        .brand {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 18px;
-        }
-
-        .brand-logo {
-            width: 38px;
-            height: 38px;
-            margin-right: 12px;
-        }
-
-        @media (max-width: 500px) {
-            .login-glass {
-                padding: 28px 8px 24px 8px;
-                max-width: 98vw;
-            }
-
-            .login-glass h1 {
-                font-size: 1.3rem;
-            }
+        .login-button:hover {
+            background-color: #003c70;
         }
     </style>
 </head>
-
 <body>
-    <div class="login-glass" id="login-section">
-        <div class="brand">
-            <img src="https://cdn-icons-png.flaticon.com/512/1055/1055687.png" alt="CloudNativeX Logo"
-                class="brand-logo">
-            <span style="font-size:1.3rem;font-weight:600;letter-spacing:0.5px;">CloudNativeX</span>
-        </div>
-        <h1>Sign in to CloudNativeX</h1>
-        <p>Access your next-gen, ultra-lightweight cloud compute platform.<br>
-            Launch WASM, containers, or native processes with full Linux isolation.<br>
-            Secure. Fast. No Docker overhead.</p>
-        <button id="auth0-login" class="auth-button">Sign in with Auth0</button>
+    <div class="overlay"></div>
+    <div class="content">
+        <h1>Welcome to PhysicsWorld</h1>
+        <p>To explore more, please log in.</p>
+        <!-- Custom login button -->
+        <button id="auth0-login" class="login-button">Login with Auth0</button>
     </div>
-    <div class="login-glass" id="project-details" style="display:none;margin-top:24px;max-width:600px;">
-        <h2 style="font-size:1.5rem;margin-bottom:12px;">Welcome to CloudNativeX!</h2>
-        <p style="color:#cfd8dc;font-size:1.08rem;margin-bottom:18px;">CloudNativeX is a revolutionary platform for
-            running secure, ultra-lightweight workloads in the cloud. We go beyond Docker and VMs by leveraging native
-            Linux features—namespaces, cgroups, and chroot—to isolate and run your applications as true processes, not
-            heavyweight containers.</p>
-        <ul style="text-align:left;color:#b0c4d9;font-size:1.05rem;margin-bottom:18px;line-height:1.6;">
-            <li><b>WASM, Containers, Native:</b> Run WebAssembly, OCI containers, or native Linux processes with the
-                same security and flexibility.</li>
-            <li><b>No Docker Daemon:</b> No more Docker overhead or daemon dependencies. Launch workloads instantly,
-                with minimal resource usage.</li>
-            <li><b>Cloud-Native Isolation:</b> Each workload gets its own Linux namespaces, cgroups, and chroot, just
-                like a container, but without the bloat.</li>
-            <li><b>Lightning Fast:</b> Start, stop, and scale workloads in milliseconds, not seconds.</li>
-            <li><b>Developer Friendly:</b> Simple APIs, beautiful UI, and seamless integration with your CI/CD and cloud
-                workflows.</li>
-        </ul>
-        <p style="color:#cfd8dc;">Our mission: <b>Make cloud compute as fast, secure, and lightweight as possible</b>—so
-            you can build, deploy, and scale anything, anywhere.</p>
-        <p style="margin-top:18px;color:#a0aec0;font-size:0.98rem;">Thank you for joining us on this journey to redefine
-            cloud-native computing!</p>
-    </div>
-    <script>
-        // Show project details after successful login
-        function showProjectDetails() {
-            document.getElementById('login-section').style.display = 'none';
-            document.getElementById('project-details').style.display = 'block';
-        }
-        // Listen for a custom event from login.js after login
-        window.addEventListener('cloudnativex:loginSuccess', showProjectDetails);
-    </script>
+
+    <!-- Include Auth0 SPA SDK -->
+    <script src="https://cdn.auth0.com/js/auth0-spa-js/1.18/auth0-spa-js.production.js"></script>
+    <script src="js/login.js"></script>  <!-- Reference your login.js here -->
 </body>
 
 </html>

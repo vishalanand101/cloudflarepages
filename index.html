@@ -1,134 +1,158 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html>
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>CloudNativeX - Next-Gen Lightweight Compute</title>
-    <link rel="stylesheet" href="css/style.css">
-    <script src="https://cdn.auth0.com/js/auth0-spa-js/1.18/auth0-spa-js.production.js"></script>
-    <script defer src="js/script.js"></script>
-    <style>
-        /* Set background image from Unsplash */
-        body {
-            font-family: 'Arial', sans-serif;
-            overflow-x: hidden;
-            height: 100vh;
-            background-image: url('https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=1500&q=80');
-            /* Relevant cloud/technology Unsplash image */
-            background-size: cover;
-            background-position: center;
-            color: #fff;
-            position: relative;
-        }
+  <meta charset="utf-8" />
+  <title>Custom Login — My App</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <style>
+    html,
+    body {
+        {
+        height: 100%;
+        margin: 0;
+        font-family: Inter, system-ui, -apple-system, Roboto, "Helvetica Neue", Arial;
+      }
+    }
 
-        /* Dark overlay on top of the background image */
-        .background-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: -1;
-        }
+    .bg {
+        {
+        position: fixed;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+      }
+    }
 
-        /* Container for content */
-        .content-container {
-            position: relative;
-            z-index: 1;
-            padding: 50px;
-            text-align: center;
-        }
+    .bg svg {
+        {
+        width: 120%;
+        height: 120%;
+        transform: rotate(10deg);
+        opacity: 0.15;
+      }
+    }
 
-        header {
-            text-align: center;
-            margin-bottom: 30px;
-        }
+    .card {
+        {
+        position: relative;
+        z-index: 2;
+        background: rgba(255, 255, 255, 0.85);
+        backdrop-filter: blur(6px);
+        padding: 32px;
+        border-radius: 12px;
+        box-shadow: 0 10px 30px rgba(10, 20, 30, 0.12);
+        max-width: 420px;
+        width: 90%;
+      }
+    }
 
-        header h1 {
-            font-size: 3rem;
-            color: #fff;
-            text-transform: uppercase;
-            font-weight: bold;
-            animation: slideIn 1.5s ease-out;
-            transform: translateY(-100px);
-        }
+    h1 {
+      margin: 0 0 8px;
+      font-size: 20px
+    }
 
-        header p.subheading {
-            font-size: 1.5rem;
-            color: #a0aec0;
-            margin-top: 10px;
-        }
+    p {
+      margin: 0 0 16px;
+      color: #333
+    }
 
-        /* Button Styles */
-        .auth-button {
-            padding: 10px 20px;
-            font-size: 1rem;
-            background-color: #004e92;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 20px;
-            transition: background-color 0.3s ease;
-        }
+    #auth0-lock-container {
+      margin-top: 8px
+    }
 
-        .auth-button:hover {
-            background-color: #003c70;
-        }
+    .footer {
+      margin-top: 14px;
+      font-size: 13px;
+      color: #666
+    }
 
-        footer {
-            margin-top: 40px;
-            text-align: center;
-            font-size: 1rem;
-            color: #607d8b;
-        }
+    .brand {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 12px
+    }
 
-        /* Keyframe Animations */
-        @keyframes slideIn {
-            0% {
-                transform: translateY(-100px);
-                opacity: 0;
-            }
-
-            100% {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-    </style>
+    .brand img {
+      height: 36px;
+      width: 36px;
+      border-radius: 6px;
+      object-fit: cover
+    }
+  </style>
+  <script src="https://cdn.auth0.com/js/lock/11.41/lock.min.js"></script>
 </head>
 
 <body>
-    <div class="background-overlay"></div>
-    <div class="content-container">
-        <header>
-            <div class="brand" style="display:flex;align-items:center;justify-content:center;margin-bottom:18px;">
-                <img src="https://cdn-icons-png.flaticon.com/512/1055/1055687.png" alt="CloudNativeX Logo"
-                    style="width:38px;height:38px;margin-right:12px;">
-                <span style="font-size:1.3rem;font-weight:600;letter-spacing:0.5px;">CloudNativeX</span>
-            </div>
-            <h1 style="font-size:2.5rem;font-weight:700;letter-spacing:1px;">Run Anything, Anywhere</h1>
-            <p class="subheading" style="color:#a0aec0;font-size:1.2rem;margin-bottom:24px;">
-                The next-gen platform for running secure, lightweight workloads.<br>
-                No Docker overhead. No VMs. Just pure performance.<br>
-                Launch WASM, containers, or native processes with full Linux isolation (namespaces, cgroups, chroot) –
-                all in the cloud, instantly.
-            </p>
-            <button id="login" class="auth-button" style="margin-right:10px;">Login</button>
-            <button id="logout" class="auth-button" style="display: none;">Logout</button>
-        </header>
-        <footer style="margin-top:48px;text-align:center;font-size:1rem;color:#a0aec0;">
-            <p>CloudNativeX © 2026 &bull; Lightweight Compute, Redefined</p>
-        </footer>
+  <div class="bg" aria-hidden="true">
+    <!-- Simple dynamic SVG background -->
+    <svg viewBox="0 0 800 600" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
+          <stop offset="0%" stop-color="#7b61ff" />
+          <stop offset="100%" stop-color="#34d399" />
+        </linearGradient>
+        <filter id="f" x="-20%" y="-20%" width="140%" height="140%">
+          <feGaussianBlur stdDeviation="60" />
+        </filter>
+      </defs>
+      <rect x="-100" y="-100" width="1000" height="800" fill="url(#g)" filter="url(#f)" />
+      <circle cx="600" cy="80" r="220" fill="#ffd166" opacity="0.12" />
+      <circle cx="160" cy="440" r="260" fill="#ef476f" opacity="0.08" />
+    </svg>
+  </div>
+
+  <div style="position:relative;display:flex;min-height:100vh;align-items:center;justify-content:center;">
+    <div class="card" role="main" aria-labelledby="login-heading">
+      <div class="brand"><img
+          src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='64' height='64'><rect rx='12' width='64' height='64' fill='%237b61ff'/><text x='50%' y='55%' dominant-baseline='middle' text-anchor='middle' font-size='26' fill='white' font-family='Arial'>A</text></svg>" />
+        <div><strong>My Decoupled Runtime</strong>
+          <div style="font-size:12px;color:#666">Lightweight process sandboxes</div>
+        </div>
+      </div>
+      <h1 id="login-heading">Sign in to continue</h1>
+      <p>Securely sign in using your account. This page is a custom Auth0 Universal Login using Lock.</p>
+
+      <div id="auth0-lock-container"></div>
+
+      <div class="footer">By signing in you agree to our <a href="#" target="_blank">terms</a>.</div>
     </div>
-    <script>
-        document.getElementById('login').addEventListener('click', function () {
-            window.location.href = '/login.html';
-        });
-    </script>
+  </div>
+
+  <script>
+    // Replace these values with your Auth0 config
+    var auth0Domain = window.AUTH0_DOMAIN || "dev-aw2zto4r1fqzsj8i.us.auth0.com";
+    var auth0ClientId = window.AUTH0_CLIENT_ID || "Loevn4yrlaE1UkugPQAeeDLQwtTPtoOu";
+    var auth0Redirect = window.AUTH0_REDIRECT_URI || (window.location.origin + "/post-login.html");
+
+    var lock = new Auth0Lock(auth0ClientId, auth0Domain, {{
+      container: 'auth0-lock-container',
+      auth: {{
+      redirect: true,
+      responseType: 'token id_token',
+      params: {{
+      scope: 'openid profile email',
+      redirect_uri: auth0Redirect
+    }}
+      }},
+    languageDictionary: {
+      {
+        title: "Welcome"
+      }
+    },
+    theme: {
+      {
+        primaryColor: "#7b61ff"
+      }
+    }
+    }});
+
+    // If you want classic popup flow instead of redirect:
+    // lock.show();
+  </script>
 </body>
 
 </html>
