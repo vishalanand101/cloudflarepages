@@ -12,21 +12,32 @@ document.addEventListener('DOMContentLoaded', async function () {
     if (loginBtn) {
         loginBtn.addEventListener('click', async function () {
             loginBtn.disabled = true;
-            loginBtn.textContent = 'Redirecting...';
-            await auth0.loginWithRedirect();
+            loginBtn.textContent = 'Opening...';
+            try {
+                await auth0.loginWithPopup();
+                // After popup login, show project details
+                if (window.location.pathname.endsWith('login.html')) {
+                    window.dispatchEvent(new Event('cloudnativex:loginSuccess'));
+                } else {
+                    window.location.href = '/index.html';
+                }
+            } catch (e) {
+                loginBtn.disabled = false;
+                loginBtn.textContent = 'Sign in with Auth0';
+                alert('Login failed: ' + (e.message || e));
+            }
         });
     }
 
-    // Handle the callback from Auth0 after redirect FIRST
+    // Handle the callback from Auth0 after redirect FIRST (for fallback)
     if (window.location.search.includes('code=') && window.location.search.includes('state=')) {
         await auth0.handleRedirectCallback();
-        // After callback, show project details if on login page
         if (window.location.pathname.endsWith('login.html')) {
             window.dispatchEvent(new Event('cloudnativex:loginSuccess'));
         } else {
             window.location.replace(window.location.pathname);
         }
-        return; // Stop further execution
+        return;
     }
 
     // Now check if the user is already authenticated
